@@ -19,11 +19,7 @@
     created() {
       console.log('Vueインスタンス作成後')
       this.message="インスタンスが作成されました"
-
-      let sec = 1
-      this.interval_id = setInterval(()=>{
-          console.log(`${sec++}秒経過`)
-        },1000)
+//1秒ずつ秒経過をinterval_id変数で実行
     },
     beforeMount() {
       console.log('マウント前')
@@ -39,7 +35,7 @@
     },
     beforeDestroy() {
         console.log('Vueインスタンス削除前')
-        clearInterval(this.interval_id)
+        //削除のタイミングで、インターバル終了
       },
     destroyed() {
       console.log('Vueインスタンス削除後')
