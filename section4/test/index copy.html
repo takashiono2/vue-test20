@@ -11,7 +11,7 @@
     data() {
       return {
         message: 'こんにちは',
-        //interval_idを定義
+        interval_id: null
       }
     },
     beforeCreate() {
@@ -20,7 +20,10 @@
     created() {
       console.log('Vueインスタンス作成後')
       this.message="インスタンスが作成されました"
-      //開始1秒から
+      let sec = 1
+      this.interval_id = setInterval(()=>{
+        console.log(`${sec++}秒経過`)
+      },1000)
     },
     beforeMount() {
       console.log('マウント前')
@@ -36,7 +39,7 @@
     },
     beforeDestroy() {
         console.log('Vueインスタンス削除前')
-        //削除のタイミングで、インターバル終了
+        clearInterval(this.interval_id);//削除のタイミングで、インターバル終了
       },
     destroyed() {
       console.log('Vueインスタンス削除後')

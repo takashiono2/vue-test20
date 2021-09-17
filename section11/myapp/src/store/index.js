@@ -6,17 +6,22 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     drawer: false,
+    addresses: []
   },
   mutations: {
     toggleSideMenu(state){
       state.drawer = !state.drawer
-    }//toggleSideMenu関数でtrue,falseの更新
+    },
+    addAddress (state, address) {
+      state.addresses.push(address)
+    }
   },
   actions: {
     toggleSideMenu({ commit }){
       commit('toggleSideMenu')
+    },
+    addAddress ({ commit }, address) {
+      commit('addAddress', address)
     }
-  },
-  modules: {
   }
 })
