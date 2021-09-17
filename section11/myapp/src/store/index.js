@@ -10,7 +10,7 @@ export default new Vuex.Store({
   mutations: {
     toggleSideMenu(state){
       state.drawer = !state.drawer
-    }
+    }//toggleSideMenu関数でtrue,falseの更新
   },
   actions: {
     toggleSideMenu({ commit }){
