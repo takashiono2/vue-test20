@@ -2,11 +2,11 @@
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
       <v-flex xs12 class="text-center">
-        <router-link :to="{name: 'address_edit'}"><!--'address_edit'へリンク-->
+        <router-link :to="{name: 'address_edit'}">
           <v-btn color="info">
             連絡先追加
           </v-btn>
-        </router-link><!--'address_edit'へリンク-->
+        </router-link>
        
       </v-flex>
 
@@ -40,9 +40,9 @@ export default {
   },
   methods: {
     submit(){
-      this.addAddress(this.address)
-      this.$router.push({name: 'addresses'})
-      this.address = {}
+      this.addAddress(this.address)//mapActionsを実行し、addressを格納する。
+      this.$router.push({name: 'addresses'})//addressesページへ
+      this.address = {}//addressは初期化
     },
   ...mapActions(['addAddress'])
   }

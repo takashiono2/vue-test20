@@ -29,9 +29,6 @@
 
 <script>
 export default {
-  created(){
-    this.addresses = this.$store.state.addresses
-  },
   data () {
     return {
       headers: [
@@ -42,6 +39,9 @@ export default {
       ],
       addresses: []
     }
-  }
+  },
+  create(){
+    this.addresses = this.$store.state.addresses
+  }//インスタンスを作成したら、ストアにaddressesのデータを取りに行く
 }
 </script>

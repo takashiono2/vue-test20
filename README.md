@@ -30,6 +30,16 @@
     　　<li>60.連絡先追加画面の作成（Vuetify2系の場合）</li>
     　　<li>61.連絡先追加機能の作成</li>
     　　<li>62.連絡先追加機能の作成（Vuetify2系の場合）</li>
+    　　<li>63.Firebaseとは</li>
+    　　<li>64.Firebaseを利用するためのセットアップ</li>
+    　　<li>65.インストールするFirebaseのSDKについての注意点</li>
+    　　<li>66.Firebaseのライブラリ追加と設定の修正</li>
+    　　<li>67.Googleアカウントで ログインするための設定</li>
+    　　<li>68.Googleログイン機能の実装</li>
+    　　<li>69.Googleログイン機能の実装（Vuetify2系の場合）</li>
+    　　<li>70.ログインユーザーの取得機能の実装</li>
+    　　<li>71.ログアウト機能の実装</li>
+    　　<li>72.ログアウト機能の実装（Vuetify2系の場合）</li>
     </ul> 
 </details>
 
