@@ -5,7 +5,7 @@
         <h1>連絡先一覧</h1>
       </v-flex>
 
-      <v-flex xs12 mt-5 mr-5 justify-right><!--右寄り-->
+      <v-flex xs12 mt-5 mr-5 text-xs-right><!--右寄り-->
         <router-link :to="{ name: 'address_edit' }">
           <v-btn color="info">
             連絡先追加
@@ -29,6 +29,9 @@
 
 <script>
 export default {
+  create(){
+    this.addresses = this.$store.state.addresses
+  },//インスタンスを作成したら、ストアにaddressesのデータを取りに行く
   data () {
     return {
       headers: [
@@ -39,9 +42,6 @@ export default {
       ],
       addresses: []
     }
-  },
-  create(){
-    this.addresses = this.$store.state.addresses
-  }//インスタンスを作成したら、ストアにaddressesのデータを取りに行く
+  }
 }
 </script>

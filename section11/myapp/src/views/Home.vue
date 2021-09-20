@@ -1,5 +1,5 @@
 <template>
-   <v-container text-xs-center justify-center>
+  <v-container text-xs-center justify-center>
     <v-layout row wrap>
       <v-flex xs12>
         <h1>マイアドレス帳</h1>
@@ -14,11 +14,10 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-
-  export default {
-    methods: {
-      ...mapActions(['login'])
-    }
+import { mapActions } from 'vuex'
+export default {
+  methods: {
+    ...mapActions(['login'])
   }
+}
 </script>
