@@ -48,6 +48,11 @@
     　　<li>78.Cloud Firestoreへのデータの保存</li>
     　　<li>79.Cloud Firestoreからのデータ取得</li>
     　　<li>80.連絡先編集画面へのページ遷移</li>
+    　　<li>81.cloud</li>
+    　　<li>82.連絡先編集フォームへのデータの復元</li>
+    　　<li>83.連絡先データの更新処理</li>
+    　　<!--<li>84.連絡先データの削除処理</li>
+    　　<li>85.連絡先データの削除処理（Vuetify2系の場合）</li>-->
     </ul> 
 </details>
 

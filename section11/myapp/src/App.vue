@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase'//firebaseを利用できるようにする
 import SideNav from './components/SideNav'
 import { mapActions } from 'vuex'
 export default {
@@ -27,9 +27,9 @@ export default {
     SideNav
   },
   created(){
-    firebase.auth().onAuthStateChanged(user => {//オブザーバーを設定
+    firebase.auth().onAuthStateChanged(user=>{//オブザーバーを設定
       if(user){
-        this.setLoginUser(user)
+        this.setLoginUser(user)//setLoginUserを実行
         this.fetchAddresses()
         if(this.$router.currentRoute.name === 'home') this.$router.push({name:'addresses'})
       } else{
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['toggleSideMenu','setLoginUser','logout','deleteLoginUser','fetchAddresses'])//toggleSideMenuのアクションヘルパー
+    ...mapActions(['toggleSideMenu','setLoginUser','logout','deleteLoginUser','fetchAddresses'])
   }
 }
 </script>
