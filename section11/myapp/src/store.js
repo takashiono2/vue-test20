@@ -27,6 +27,10 @@ export default new Vuex.Store({
     updateAddress(state,{id ,address}){
       const index = state.addresses.findIndex(address => address.id === id)
       state.addresses[index] = address
+    },
+    deleteAddress(state,{ id }){
+      const index = state.addresses.findIndex(address => address.id === id)
+      state.addresses.splice(index,1)
     }
   },
   actions: {
@@ -39,8 +43,8 @@ export default new Vuex.Store({
       })
     },
     login () {
-      const google_auth_provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(google_auth_provider)
+      const google_auth_provider = new firebase.auth.GoogleAuthProvider();//firebaseでgoogleの認証を使う
+      firebase.auth().signInWithRedirect(google_auth_provider);//firebaseでgoogleの認証ページへリダイレクト
     },
     logout () {
       firebase.auth().signOut()
@@ -53,7 +57,7 @@ export default new Vuex.Store({
     },
     addAddress ({ getters, commit }, address) {
       if (getters.uid) {
-        firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc=>{
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc=>{//collection内の`users/${getters.uid}/addresses`にddressを追加
           commit('addAddress', {id: doc.id,address})
         })
       }
@@ -62,6 +66,13 @@ export default new Vuex.Store({
       if(getters.uid){
         firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(()=>{
           commit('updateAddress', {id: address})
+        })
+      }
+    },
+    deleteAddress({ getters,commit },{ id }){
+      if(getters.uid){
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).delete().then(()=>{
+          commit('deleteAddress', { id })
         })
       }
     }

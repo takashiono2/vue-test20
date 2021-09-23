@@ -6,19 +6,19 @@
         <span>マイアドレス帳</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-if="$store.state.login_user">
+      <v-toolbar-items v-if="$store.state.login_user"><!--ボタンを囲む-->
         <v-btn @click="logout">ログアウト</v-btn>
-      </v-toolbar-items>
+      </v-toolbar-items ><!--ボタンを囲む-->
     </v-toolbar> 
     <SideNav/>
-    <v-content>
+    <v-content><!--router-viewを囲む-->
       <router-view/>
-    </v-content>
+    </v-content><!--router-viewを囲む-->
   </v-app>
 </template>
 
 <script>
-import firebase from 'firebase'//firebaseを利用できるようにする
+import firebase from 'firebase'
 import SideNav from './components/SideNav'
 import { mapActions } from 'vuex'
 export default {
@@ -29,9 +29,10 @@ export default {
   created(){
     firebase.auth().onAuthStateChanged(user=>{//オブザーバーを設定
       if(user){
-        this.setLoginUser(user)//setLoginUserを実行
+        this.setLoginUser(user)
         this.fetchAddresses()
-        if(this.$router.currentRoute.name === 'home') this.$router.push({name:'addresses'})
+         //ルーターオブジェクト として表される現在のルートが'home'なら
+        this.$router.push({name:'addresses'})
       } else{
         this.deleteLoginUser()
         this.$router.push({name:'home'})

@@ -26,6 +26,9 @@
                   <v-icon small class="mr-2">edit</v-icon>
                 </router-link>
               </span>
+              <span>
+                <v-icon small class="mr-2" @click="deleteConfirm(props.item.id)">delete</v-icon>
+              </span>
             </td>
           </template>
         </v-data-table>
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   create(){
     this.addresses = this.$store.state.addresses
@@ -50,6 +54,14 @@ export default {
       ],
       addresses: []
     }
+  },
+  methods: {
+    deleteConfirm(id){
+      if(confirm('削除してよろしいですか？')){
+        this.deleteAddress({ id })
+      }
+    },
+    ...mapActions(['deleteAddress'])
   }
 }
 </script>
