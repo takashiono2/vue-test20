@@ -11,7 +11,6 @@ import firebase from 'firebase'
 // import { getAnalytics } from "firebase/analytics";
 
 Vue.config.productionTip = false
-
   // Import the functions you need from the SDKs you need
   // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
   // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js";
@@ -21,14 +20,14 @@ Vue.config.productionTip = false
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const config = {
-    apiKey: "AIzaSyCvcBENXvPA9b8cdx3Zycu5uAsiDoUQLu0",
-    authDomain: "my-address-pj-cad7f.firebaseapp.com",
-    databaseURL: "https://my-address-pj-cad7f.firebaseio.com",
-    projectId: "my-address-pj-cad7f",
-    storageBucket: "my-address-pj-cad7f.appspot.com",
-    messagingSenderId: "316956478168",
-    // appId: "1:316956478168:web:42bf7bb76061f08d7365ad",
-    // measurementId: "G-WHGEY0Y4PE"
+    apiKey: "AIzaSyAu513Zu5EOPNgxBjKJoea31j8qIc8v3sM",
+    authDomain: "my-address-pj-93847.firebaseapp.com",
+    databaseURL: "https://my-address-pj-93847firebaseio.com",
+    projectId: "my-address-pj-93847",
+    storageBucket: "my-address-pj-93847.appspot.com",
+    messagingSenderId: "406719211567",
+    appId: "1:406719211567:web:06be3b1255c8137dcdbeda",
+    measurementId: "G-JSJPHX0W5X"
   };
 
   // Initialize Firebase

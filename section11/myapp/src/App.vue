@@ -1,19 +1,21 @@
 <template>
   <v-app>
     <v-toolbar app>
-      <v-toolbar-side-icon v-show = "$store.state.login_user" @click.stop="toggleSideMenu"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-show="$store.state.login_user" @click.stop="toggleSideMenu"></v-toolbar-side-icon>
       <v-toolbar-title class="headline text-uppercase">
         <span>マイアドレス帳</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-if="$store.state.login_user"><!--ボタンを囲む-->
+      <v-toolbar-items v-if="$store.state.login_user">
+      <!-- <v-toolbar-items> -->
         <v-btn @click="logout">ログアウト</v-btn>
-      </v-toolbar-items ><!--ボタンを囲む-->
-    </v-toolbar> 
+      </v-toolbar-items>
+    </v-toolbar>
     <SideNav/>
-    <v-content><!--router-viewを囲む-->
+
+    <v-content>
       <router-view/>
-    </v-content><!--router-viewを囲む-->
+    </v-content>
   </v-app>
 </template>
 
@@ -23,29 +25,50 @@ import SideNav from './components/SideNav'
 import { mapActions } from 'vuex'
 export default {
   name: 'App',
-  components:{
+  components: {
     SideNav
   },
-  created(){
-    firebase.auth().onAuthStateChanged(user=>{//オブザーバーを設定
-      if(user){
+  created () {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
         this.setLoginUser(user)
-        this.fetchAddresses()
-         //ルーターオブジェクト として表される現在のルートが'home'なら
-        this.$router.push({name:'addresses'})
-      } else{
+        // this.fetchAddresses()
+        if (this.$router.currentRoute.name === 'home') 
+        this.$router.push({ name: 'addresses' }).catch(error => {
+          if (error.name === 'NavigationDuplicated') {
+            throw Error(error)
+          }
+        })
+      } else {
         this.deleteLoginUser()
-        this.$router.push({name:'home'})
+        this.$router.push({ name: 'home' })
+        // if (!this.$router.currentRoute.name === 'home')
+        //   this.$router.push({ name: 'home' }).catch(error => {
+        //     if (error.name === 'NavigationDuplicated') {
+        //       throw Error(error)
+        //     }
+        //   })
       }
     })
   },
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.setLoginUser(user)
+  //       this.fetchAddresses()
+  //       if (this.$router.currentRoute.name === 'home') this.$router.push({ name: 'addresses' })
+  //     } else {
+  //       this.deleteLoginUser()
+  //       this.$router.push({ name: 'home' })
+  //     }
+  //   })
+  // },
   data () {
     return {
       //
     }
   },
-  methods:{
-    ...mapActions(['toggleSideMenu','setLoginUser','logout','deleteLoginUser','fetchAddresses'])
+  methods: {
+    ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'fetchAddresses'])
   }
 }
 </script>

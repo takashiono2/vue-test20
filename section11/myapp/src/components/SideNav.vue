@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.drawer" absolute temporary><!--サイドナビゲーションの開閉オプション,stateに初期値データあり-->
+  <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
     <v-list class="pa-1">
       <v-list-tile avatar>
         <v-list-tile-avatar>
@@ -34,7 +34,8 @@ export default {
   data () {
     return {
       items: [
-        { title: '連絡先一覧', icon: 'list', link:{ name:'addresses' }}//addresses名前付きルート
+        // { title: 'ホーム', icon: 'home', link: { name: 'home'} },
+        { title: '連絡先一覧', icon: 'list', link: { name: 'addresses' } }
       ]
     }
   },
