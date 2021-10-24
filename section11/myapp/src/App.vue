@@ -32,7 +32,7 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setLoginUser(user)
-        // this.fetchAddresses()
+        this.fetchAddresses()
         if (this.$router.currentRoute.name === 'home') 
         this.$router.push({ name: 'addresses' }).catch(error => {
           if (error.name === 'NavigationDuplicated') {
