@@ -20,8 +20,14 @@ export default new Vuex.Store({
     toggleSideMenu (state) {
       state.drawer = !state.drawer
     },
-    addAddress (state, address) {
+    addAddress (state, {id,address}) {
+      address.id = id
       state.addresses.push(address)
+    },
+    //findIndexは、条件にあうindexを探して見つけた最初のIndexを返す
+    updateAddress(state, {id,address}) {
+      const index = state.addresses.findIndex(address => address.id === id)
+      state.addresses[index] = address
     }
   },
   actions: {
@@ -33,7 +39,7 @@ export default new Vuex.Store({
     //Snapshotは、data()でドキュメントのデータが取れる。ドキュメントのデータ(Jsonデータの部分)
     fetchAddresses({getters,commit}){
       firebase.firestore().collection(`users/${getters.uid}/addresses`).get().then(snapshot=>{
-        snapshot.forEach(doc=>commit('addAddress',doc.data()))
+        snapshot.forEach(doc=>commit('addAddress',{ id: doc.id, address: doc.data()}))
       })
     },
     login () {
@@ -51,13 +57,21 @@ export default new Vuex.Store({
     },
     addAddress ({ getters,commit }, address) {
       if(getters.uid)
-      // firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc => {
-      // commit('addAddress', { id: doc.id, address })
-      firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address)
-      commit('addAddress', address)
-      // })
+      firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc => {
+      commit('addAddress', { id: doc.id, address })
+      })
     }
   },
+  //doc(id).update(address)では、doc(id)でidを渡して、update(address)を更新している
+  //mutationのが実行（commit）されたら、firestoreからデータをとってくる
+  updateAddress({ getters,commit },{ id,address }){
+    if(getters.uid){
+      firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(() => {
+        commit('updateAddress', { id, address })
+      })
+    }
+  },
+  //getAddressById: stateより右は、関数を返す関数
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
     photoURL: state => state.login_user ? state.login_user.photoURL : '',

@@ -32,7 +32,7 @@ export default {
     if (address) {
       this.address = address
     } else {
-      this.$router.push({ name: 'addresses' })
+      this.$router.push({ name: 'addresses' })//取得できない場合は、一覧へ
     }
   },
   data () {
