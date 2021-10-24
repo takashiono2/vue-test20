@@ -28,6 +28,10 @@ export default new Vuex.Store({
     updateAddress(state, {id,address}) {
       const index = state.addresses.findIndex(address => address.id === id)
       state.addresses[index] = address
+    },
+    deleteAddress(state, { id }) {
+      const index = state.addresses.findIndex(address => address.id === id)
+      state.addresses.splice(index,1)
     }
   },
   actions: {
@@ -58,17 +62,24 @@ export default new Vuex.Store({
     addAddress ({ getters,commit }, address) {
       if(getters.uid)
       firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc => {
-      commit('addAddress', { id: doc.id, address })
+        commit('addAddress', { id: doc.id, address })
       })
-    }
-  },
+    },
   //doc(id).update(address)では、doc(id)でidを渡して、update(address)を更新している
   //mutationのが実行（commit）されたら、firestoreからデータをとってくる
-  updateAddress({ getters,commit },{ id,address }){
-    if(getters.uid){
-      firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(() => {
-        commit('updateAddress', { id, address })
-      })
+    updateAddress({ getters,commit },{ id,address }){
+      if(getters.uid){
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(() => {
+          commit('updateAddress', { id, address })
+        })
+      }
+    },
+    deleteAddress({ getters,commit },{ id }){
+      if(getters.uid){
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).delete().then(() => {
+          commit('deleteAddress', { id })
+        })
+      }
     }
   },
   //getAddressById: stateより右は、関数を返す関数
